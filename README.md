@@ -97,6 +97,7 @@ DHCP server configuration.
     - name: local-server
       mac_address: "00:11:22:33:44:55"
       fixed_address: 192.168.10.10
+      domain_search: example.local
       default_lease_time: 43200
       max_lease_time: 86400
       parameters:
