@@ -99,6 +99,9 @@ host {{ h.name }} {
 {% if h.fixed_address is defined %}
   fixed-address {{ h.fixed_address }};
 {% endif %}
+#add comment 
+{% if h.comment is defined %} # {{ h.comment }}
+{% endif %}
 {% if h.routers is defined %}
   option routers {{ h.routers }};
 {% endif %}
@@ -115,7 +118,6 @@ host {{ h.name }} {
 {% if h.domain_search is defined %}
    option domain-search {{ h.domain_search }};
 {% endif %}
-
 {% if h.default_lease_time is defined %}
   default-lease-time {{ h.default_lease_time }};
 {% endif %}
