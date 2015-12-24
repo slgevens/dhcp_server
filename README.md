@@ -76,6 +76,7 @@ DHCP server configuration.
       broadcast_address: 192.168.10.255
       domain_nameservers: 192.168.10.1, 192.168.10.2
       domain_name: example.org
+      domain_search: example.org
       ntp_servers: pool.ntp.org
       default_lease_time: 3600
       max_lease_time: 7200
@@ -207,7 +208,8 @@ Examples
           interface: vlan10
           domain_nameserver: 192.168.10.1
           domain_name: example.local
-          range_start: 192.168.10.150
+          domain_search: example.local
+	  range_start: 192.168.10.150
           range_end: 192.168.10.200
           routers: 192.168.10.1
         dhcp_shared_networks:
@@ -219,7 +221,8 @@ Examples
             routers: 10.7.0.1
             domain_nameserver: 10.7.0.1
             domain_name: example.public0
-            ntp_servers: 10.7.0.1
+            domain_search: example.local
+	    ntp_servers: 10.7.0.1
             pools:
             - range_start: 10.7.0.2
               range_end: 10.7.0.254
@@ -228,7 +231,8 @@ Examples
             routers: 10.8.0.1
             domain_nameserver: 10.8.0.1
             domain_name: example.public1
-            ntp_servers: 10.8.0.1
+            domain_search: example.local
+	    ntp_servers: 10.8.0.1
             pools:
             - range_start: 10.8.0.2
               range_end: 10.8.0.254
