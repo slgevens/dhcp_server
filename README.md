@@ -3,6 +3,13 @@ dhcp_server
 
 This role installs and configures a DHCP server.
 
+ADD
+---
+
+##
+- comment for hosts 
+- domain_search for hosts
+
 Requirements
 ------------
 
