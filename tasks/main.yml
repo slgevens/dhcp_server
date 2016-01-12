@@ -50,4 +50,4 @@
 
 # Enable DHCP server
 - name: Start the dhcp services DHCP
-  service: name={{ dhcp_service }} state=started enabled=yes
+  service: name=isc-dhcp-server state=started enabled=yes
