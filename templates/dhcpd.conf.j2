@@ -94,6 +94,7 @@ class "{{ c.name }}" {
 # Hosts
 {% for h in dhcp_hosts %}
 host {{ h.name }} {
+{% for h.mac_address %}
   hardware ethernet {{ h.mac_address }};
   ddns-hostname {{ h.name }};
 {% if h.fixed_address is defined %}
@@ -173,6 +174,7 @@ subnet {{ s.base }} netmask {{ s.netmask }} {
 {% if p.parameters is defined %}
 {% for param in p.parameters %}
     {{ param }};
+{% endfor %}
 {% endfor %}
 {% endif %}
   }
