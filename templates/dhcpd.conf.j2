@@ -90,11 +90,11 @@ class "{{ c.name }}" {
 {% endfor %}
 {% endif %}
 
-{% if dhcp_hosts is defined %}
 # Hosts
+{% if dhcp_hosts is defined %}
 {% for h in dhcp_hosts %}
 host {{ h.name }} {
-{% for h.mac_address %}
+{% if h.mac_address is defined %}
   hardware ethernet {{ h.mac_address }};
   ddns-hostname {{ h.name }};
 {% if h.fixed_address is defined %}
@@ -129,8 +129,7 @@ host {{ h.name }} {
   {{ p }};
 {% endfor %}
 {% endif %}
-}
-{% endfor %}
+{% endif %}
 {% endif %}
 
 {% if dhcp_subnets is defined %}
