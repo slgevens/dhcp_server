@@ -97,6 +97,7 @@ host {{ h.name }} {
 {% if h.mac_address is defined %}
   hardware ethernet {{ h.mac_address }};
   ddns-hostname {{ h.name }};
+{% endif %}
 {% if h.fixed_address is defined %}
   fixed-address {{ h.fixed_address }};
 {% endif %}
@@ -130,7 +131,6 @@ host {{ h.name }} {
 {% endfor %}
 {% endif %}
 {% endfor %}
-{% endif %}
 {% endif %}
 
 {% if dhcp_subnets is defined %}
