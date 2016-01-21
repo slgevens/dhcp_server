@@ -116,7 +116,7 @@ host {{ h.name }} {
   option domain-name "{{ h.domain_name }}";
 {% endif %}
 {% if h.domain_search is defined %}
-   option domain-search {{ h.domain_search }};
+   option domain-search "{{ h.domain_search }}";
 {% endif %}
 {% if h.default_lease_time is defined %}
   default-lease-time {{ h.default_lease_time }};
