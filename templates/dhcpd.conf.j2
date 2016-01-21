@@ -115,7 +115,6 @@ host {{ h.name }} {
 {% if h.domain_name is defined %}
   option domain-name "{{ h.domain_name }}";
 {% endif %}
-# Add option domain search
 {% if h.domain_search is defined %}
    option domain-search {{ h.domain_search }};
 {% endif %}
