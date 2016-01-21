@@ -94,7 +94,9 @@ class "{{ c.name }}" {
 # Hosts
 {% for h in dhcp_hosts %}
 host {{ h.name }} {
+{% if h.mac_address is defined %}
   hardware ethernet {{ h.mac_address }};
+{% endif %}
   ddns-hostname {{ h.name }};
 {% if h.fixed_address is defined %}
   fixed-address {{ h.fixed_address }};
