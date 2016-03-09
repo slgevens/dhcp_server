@@ -23,6 +23,8 @@ max-lease-time {{ dhcp_common_max_lease_time }};
 # Dynamic DNS
 ddns-updates {{ dhcp_ddns_updates | ternary("on", "off") }};
 ddns-update-style {{ dhcp_ddns_update_style }};
+{{ dhcp_ddns_client_updates | ternary("allow", "ignore") }} client-updates;
+{{ dhcp_ddns_unknown_clients | ternary("allow", "ignore") }} unknown-clients;
 update-static-leases {{ dhcp_ddns_update_static_leases | ternary("on", "off") }};
 
 {% if dhcp_ddns_keys is defined %}
@@ -163,13 +165,12 @@ subnet {{ s.base }} netmask {{ s.netmask }} {
 {% if s.max_lease_time is defined %}
   max-lease-time {{ s.max_lease_time }};
 {% endif %}
-# no need pool [9/3/16]
-#{% if s.pools is defined %}
-#{% for p in s.pools %}
- # pool {
-#{% if p.rule is defined %}
- #   {{ p.rule }};
-#{% endif %}
+{% if s.pools is defined %}
+{% for p in s.pools %}
+pool {
+{% if p.rule is defined %}
+   {{ p.rule }};
+{% endif %}
     range {{ p.range_start }} {{ p.range_end }};
 {% if p.parameters is defined %}
 {% for param in p.parameters %}
