@@ -112,9 +112,6 @@ subnet {{ s.base }} netmask {{ s.netmask }} {
 {% if s.domain_name is defined %}
   option domain-name "{{ s.domain_name }}";
 {% endif %}
-{% if s.domain_search is defined %}
-  option domain-search "{{ h.domain_search }}";
-{% endif %}
 {% if s.ntp_servers is defined %}
   option ntp-servers {{ s.ntp_servers }};
 {% endif %}
@@ -263,7 +260,7 @@ host {{ h.name }} {
 {% if h.domain_name is defined %}
   option domain-name "{{ h.domain_name }}";
 {% endif %}
-{% if h.domain_search is defined %}
+ {% if h.domain_search is defined %}
   option domain-search "{{ h.domain_search }}";
 {% endif %}
 {% if h.default_lease_time is defined %}
