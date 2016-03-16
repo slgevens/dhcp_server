@@ -113,7 +113,7 @@ subnet {{ s.base }} netmask {{ s.netmask }} {
   option domain-name "{{ s.domain_name }}";
 {% endif %}
 {% if s.domain_search is defined %}
-  option domain-search "{{ h.domain_search }}";
+  option domain-search "{{ s.domain_search }}";
 {% endif %}
 {% if s.ntp_servers is defined %}
   option ntp-servers {{ s.ntp_servers }};
