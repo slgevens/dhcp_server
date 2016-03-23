@@ -90,64 +90,6 @@ class "{{ c.name }}" {
 {% endfor %}
 {% endif %}
 
-{% if dhcp_subnets is defined %}
-# Subnets
-{% for s in dhcp_subnets %}
-subnet {{ s.base }} netmask {{ s.netmask }} {
-{% if s.interface is defined %}
-  interface "{{ s.interface }}";
-{% endif %}
-{% if s.range_start is defined %}
-  range {{ s.range_start }} {{ s.range_end }};
-{% endif %}
-{% if s.routers is defined %}
-  option routers {{ s.routers }};
-{% endif %}
-{% if s.broadcast_address is defined %}
-  option broadcast-address {{ s.broadcast_address }};
-{% endif %}
-{% if s.domain_nameservers is defined %}
-  option domain-name-servers {{ s.domain_nameservers }};
-{% endif %}
-{% if s.domain_name is defined %}
-  option domain-name "{{ s.domain_name }}";
-{% endif %}
-{% if s.domain_search is defined %}
-  option domain-search "{{ s.domain_search }}";
-{% endif %}
-{% if s.ntp_servers is defined %}
-  option ntp-servers {{ s.ntp_servers }};
-{% endif %}
-{% if s.default_lease_time is defined %}
-  default-lease-time {{ s.default_lease_time }};
-{% endif %}
-{% if s.max_lease_time is defined %}
-  max-lease-time {{ s.max_lease_time }};
-{% endif %}
-{% if s.pools is defined %}
-{% for p in s.pools %}
-pool {
-{% if p.rule is defined %}
-   {{ p.rule }};
-{% endif %}
-    range {{ p.range_start }} {{ p.range_end }};
-{% if p.parameters is defined %}
-{% for param in p.parameters %}
-    {{ param }};
-{% endfor %}
-{% endif %}
-  }
-{% endfor %}
-{% endif %}
-{% if s.parameters is defined %}
-{% for p in s.parameters %}
-  {{ p }};
-{% endfor %}
-{% endif %}
-}
-{% endfor %}
-{% endif %}
-
 {% if dhcp_shared_networks is defined %}
 # Shared networks
 {% for n in dhcp_shared_networks %}
@@ -158,7 +100,13 @@ shared-network {{ n.name }} {
 {% for s in n.subnets %}
   subnet {{ s.base }} netmask {{ s.netmask }} {
 {% if s.range_start is defined %}
-    range {{ s.range_start }} {{ s.range_end }};
+   range {{ s.range_start }} {{ s.range_end }};
+{% endif %}
+{% if s.range_start1 is defined %}
+   range {{ s.range_start1 }} {{ s.range_end1 }};
+{% endif %}
+{% if s.range_start2 is defined %}
+   range {{ s.range_start2 }} {{ s.range_end2 }};
 {% endif %}
 {% if s.routers is defined %}
     option routers {{ s.routers }};
@@ -220,6 +168,64 @@ shared-network {{ n.name }} {
 {% endif %}
 {% if n.parameters is defined %}
 {% for p in n.parameters %}
+  {{ p }};
+{% endfor %}
+{% endif %}
+}
+{% endfor %}
+{% endif %}
+
+{% if dhcp_subnets is defined %}
+# Subnets
+{% for s in dhcp_subnets %}
+subnet {{ s.base }} netmask {{ s.netmask }} {
+{% if s.interface is defined %}
+  interface "{{ s.interface }}";
+{% endif %}
+{% if s.range_start is defined %}
+  range {{ s.range_start }} {{ s.range_end }};
+{% endif %}
+{% if s.routers is defined %}
+  option routers {{ s.routers }};
+{% endif %}
+{% if s.broadcast_address is defined %}
+  option broadcast-address {{ s.broadcast_address }};
+{% endif %}
+{% if s.domain_nameservers is defined %}
+  option domain-name-servers {{ s.domain_nameservers }};
+{% endif %}
+{% if s.domain_name is defined %}
+  option domain-name "{{ s.domain_name }}";
+{% endif %}
+{% if s.domain_search is defined %}
+  option domain-search "{{ s.domain_search }}";
+{% endif %}
+{% if s.ntp_servers is defined %}
+  option ntp-servers {{ s.ntp_servers }};
+{% endif %}
+{% if s.default_lease_time is defined %}
+  default-lease-time {{ s.default_lease_time }};
+{% endif %}
+{% if s.max_lease_time is defined %}
+  max-lease-time {{ s.max_lease_time }};
+{% endif %}
+{% if s.pools is defined %}
+{% for p in s.pools %}
+pool {
+{% if p.rule is defined %}
+   {{ p.rule }};
+{% endif %}
+    range {{ p.range_start }} {{ p.range_end }};
+{% if p.parameters is defined %}
+{% for param in p.parameters %}
+    {{ param }};
+{% endfor %}
+{% endif %}
+  }
+{% endfor %}
+{% endif %}
+{% if s.parameters is defined %}
+{% for p in s.parameters %}
   {{ p }};
 {% endfor %}
 {% endif %}
